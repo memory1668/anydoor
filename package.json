@@ -13,10 +13,10 @@
 	"lint":"eslint .",
 	"fix":"eslint --fix ."
   },
-  "pre-commit":{
+  "pre-commit":[
 	"fix",
 	"lint"
-  },
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/memory1668/anydoor.git"
