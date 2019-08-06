@@ -1,0 +1,30 @@
+{
+  "name": "anydoor",
+  "version": "1.0.0",
+  "description": "Tiny Node.js web server",
+  "main": ".eslintrc.js",
+  "devDependencies": {
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.1.0",
+    "pre-commit": "^1.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"lint":"eslint .",
+	"fix":"eslint --fix ."
+  },
+  "pre-commit":{
+	"fix",
+	"lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/memory1668/anydoor.git"
+  },
+  "author": "ruankj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/memory1668/anydoor/issues"
+  },
+  "homepage": "https://github.com/memory1668/anydoor#readme"
+}
