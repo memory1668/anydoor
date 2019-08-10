@@ -3,6 +3,7 @@ const {promisify} = require('util')
 const Handlebars = require('handlebars')
 const path = require('path')
 const conf = require('../config/defaultConfig')
+const mime = require('./mime')
 
 const tplPath = path.join(__dirname,'../template/dir.tpl')
 const source = fs.readFileSync(tplPath)
@@ -22,11 +23,11 @@ module.exports = async function(req,res,fileName){
         title:path.basename(fileName),
         dir: dir ? `/${dir}`:''
       }
-      console.info(dir)
+      // console.info(dir)
       res.end(template(data))
     }else if(stats.isFile()){
       res.statusCode = 200
-      res.setHeader('Content-Type','text/plain')
+      res.setHeader('Content-Type',mime(fileName).text)
       fs.createReadStream(fileName).pipe(res)
     }
   }
