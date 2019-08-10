@@ -7,14 +7,14 @@
   <title>{{title}}</title>
   <style>
     a{
-      display: block;
-      font-size: 24px;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
 {{#each files}}
-  <a href="{{../dir}}/{{this}}">{{this}}</a>
+  <img src="{{icon}}" alt="" width="15px" height="15px">
+  <a href="{{../dir}}/{{file}}">{{file}}</a></br>
 {{/each}}
 </body>
 </html>

@@ -18,12 +18,20 @@ module.exports = async function(req,res,fileName){
       res.statusCode = 200
       res.setHeader('Content-Type','text/html')
       const dir = path.relative(conf.root,fileName)
+      const iconPath = path.relative(conf.root,'E:\\myweb\\anydoor\\images')
       const data = {
-        files,
+        files:files.map(file=>{
+          const sonPath = path.join(fileName,file)//子目录的路径
+          let sonStats = fs.statSync(sonPath)//要用同步的方法，用来判断子目录所有文件是文件还是文件夹
+          return {
+            file,
+            icon:sonStats.isDirectory() ? `/${iconPath + '/folder.png'}`:`/${iconPath + mime(file).icon}`,//是文件夹还是文件，是文件还要进一步判断mime类型
+          }
+        }),
         title:path.basename(fileName),
-        dir: dir ? `/${dir}`:''
+        dir: dir ? `/${dir}`:'',//加斜杠防止路径出错，进入深层目录会出现奇怪的错误，待解决
       }
-      // console.info(dir)
+      // console.info(data.imgSrc)
       res.end(template(data))
     }else if(stats.isFile()){
       res.statusCode = 200
