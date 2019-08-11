@@ -4,6 +4,7 @@ const Handlebars = require('handlebars')
 const path = require('path')
 const conf = require('../config/defaultConfig')
 const mime = require('./mime')
+const compress = require('./compress')
 
 const tplPath = path.join(__dirname,'../template/dir.tpl')
 const source = fs.readFileSync(tplPath)
@@ -18,7 +19,7 @@ module.exports = async function(req,res,fileName){
       res.statusCode = 200
       res.setHeader('Content-Type','text/html')
       const dir = path.relative(conf.root,fileName)
-      const iconPath = path.relative(conf.root,'E:\\myweb\\anydoor\\images')
+      const iconPath = path.relative(conf.root,'E:\\myweb\\anydoor\\src\\images')
       const data = {
         files:files.map(file=>{
           const sonPath = path.join(fileName,file)//子目录的路径
@@ -36,7 +37,11 @@ module.exports = async function(req,res,fileName){
     }else if(stats.isFile()){
       res.statusCode = 200
       res.setHeader('Content-Type',mime(fileName).text)
-      fs.createReadStream(fileName).pipe(res)
+      let rs = fs.createReadStream(fileName)
+      if(fileName.match(conf.compress)){//对配置文件中特定的文件进行压缩
+        rs = compress(rs,req,res)//对文件流进行压缩返回值是压缩后的流
+      }
+      rs.pipe(res)
     }
   }
   catch(ex){
