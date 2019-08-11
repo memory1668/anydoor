@@ -5,6 +5,7 @@ const path = require('path')
 const conf = require('../config/defaultConfig')
 const mime = require('./mime')
 const compress = require('./compress')
+const isFresh = require('./cache')
 
 const tplPath = path.join(__dirname,'../template/dir.tpl')
 const source = fs.readFileSync(tplPath)
@@ -35,8 +36,13 @@ module.exports = async function(req,res,fileName){
       // console.info(data.imgSrc)
       res.end(template(data))
     }else if(stats.isFile()){
-      res.statusCode = 200
       res.setHeader('Content-Type',mime(fileName).text)
+      if(isFresh(req,res,stats)){
+        res.statusCode = 304
+        res.end()
+        return
+      }
+      res.statusCode = 200
       let rs = fs.createReadStream(fileName)
       if(fileName.match(conf.compress)){//对配置文件中特定的文件进行压缩
         rs = compress(rs,req,res)//对文件流进行压缩返回值是压缩后的流
