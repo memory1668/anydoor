@@ -6,19 +6,17 @@ const openUrl = require('./helper/openUrl')
 
 class Server{
   constructor(config){
-    this.conf = Object.assign({},conf,config)
+    this.conf = Object.assign({},conf,config)//合并配置
   }
   start(){
     const server = http.createServer((req,res)=>{
-      const win32Url = req.url
-      const fileName = this.conf.root + win32Url
+      const fileName = this.conf.root + req.url//访问资源的根目录
       route(req,res,fileName,this.conf)
     })
-
     server.listen(this.conf.port,this.conf.hostname,()=>{
-      const addr = `http://${this.conf.hostname}:${this.conf.port}`
-      console.info(`server started at ${chalk.green(addr)}`)
-      openUrl(addr)
+      const host = `http://${this.conf.hostname}:${this.conf.port}`
+      console.info(`server started at:${chalk.green(host)}`)
+      openUrl(host)//自动打开浏览器
     })
   }
 }

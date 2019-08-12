@@ -2,9 +2,9 @@
   "name": "anydoor1668",
   "version": "0.1.0",
   "description": "Tiny Node.js web server",
-  "main": "src/app.js",
+  "main":"src/app.js",
   "bin":{
-      "anydoor":"bin/anydoor1668"
+      "anydoor1668":"bin/anydoor1668"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
