@@ -19,7 +19,7 @@ module.exports = async function(req,res,fileName,conf){
       res.statusCode = 200
       res.setHeader('Content-Type','text/html')
       const dir = path.relative(conf.root,fileName)
-      const iconPath = path.relative(conf.root,'E:\\myweb\\anydoor\\src\\images')
+      const iconPath = path.relative(conf.root,'E:\\myweb\\anydoor1668\\src\\images')
       const data = {
         files:files.map(file=>{
           const sonPath = path.join(fileName,file)//子目录的路径
