@@ -1,8 +1,11 @@
 {
-  "name": "anydoor",
-  "version": "1.0.0",
+  "name": "anydoor1668",
+  "version": "0.1.0",
   "description": "Tiny Node.js web server",
-  "main": ".eslintrc.js",
+  "main": "src/app.js",
+  "bin":{
+      "anydoor":"bin/anydoor1668"
+  },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
     "eslint": "^6.1.0",
@@ -29,6 +32,7 @@
   "homepage": "https://github.com/memory1668/anydoor#readme",
   "dependencies": {
     "chalk": "^2.4.2",
-    "handlebars": "^4.1.2"
+    "handlebars": "^4.1.2",
+    "yargs": "^13.3.0"
   }
 }

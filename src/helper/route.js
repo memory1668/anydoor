@@ -2,7 +2,6 @@ const fs = require('fs')
 const {promisify} = require('util')
 const Handlebars = require('handlebars')
 const path = require('path')
-const conf = require('../config/defaultConfig')
 const mime = require('./mime')
 const compress = require('./compress')
 const isFresh = require('./cache')
@@ -12,7 +11,7 @@ const source = fs.readFileSync(tplPath)
 const template = Handlebars.compile(source.toString())
 const stat = promisify(fs.stat)
 const readdir = promisify(fs.readdir)
-module.exports = async function(req,res,fileName){
+module.exports = async function(req,res,fileName,conf){
   try{
     const stats = await stat(fileName)
     if(stats.isDirectory()){
